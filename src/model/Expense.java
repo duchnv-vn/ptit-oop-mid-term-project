@@ -1,7 +1,7 @@
 package model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 /**
@@ -9,16 +9,14 @@ import java.util.UUID;
  */
 public class Expense {
     private final UUID id;
-    private final UUID userId;
     private final UUID categoryId;
     private final BigDecimal amount;
     private final String currency;
-    private final LocalDateTime occurredAt;
+    private final LocalDate occurredAt;
     private final String note;
 
-    public Expense(UUID id, UUID userId, UUID categoryId, BigDecimal amount, String currency, LocalDateTime occurredAt, String note) {
+    public Expense(UUID id, UUID categoryId, BigDecimal amount, String currency, LocalDate occurredAt, String note) {
         this.id = id;
-        this.userId = userId;
         this.categoryId = categoryId;
         this.amount = amount;
         this.currency = currency;
@@ -28,10 +26,6 @@ public class Expense {
 
     public UUID getId() {
         return id;
-    }
-
-    public UUID getUserId() {
-        return userId;
     }
 
     public UUID getCategoryId() {
@@ -46,7 +40,7 @@ public class Expense {
         return currency;
     }
 
-    public LocalDateTime getOccurredAt() {
+    public LocalDate getOccurredAt() {
         return occurredAt;
     }
 

@@ -88,6 +88,22 @@ public class ExpenseManager {
         saveToStorage();
     }
 
+    public synchronized List<MonthlySummary> getMonthlySummaries() {
+        Map<YearMonth, BigDecimal> totalsByMonth = new HashMap<>();
+        for (Expense expense : expenses) {
+            YearMonth month = YearMonth.from(expense.getOccurredAt());
+            totalsByMonth.merge(month, expense.getAmount(), BigDecimal::add);
+        }
+
+        List<MonthlySummary> summaries = new ArrayList<>();
+        for (Map.Entry<YearMonth, BigDecimal> entry : totalsByMonth.entrySet()) {
+            summaries.add(new MonthlySummary(entry.getKey(), entry.getValue()));
+        }
+
+        summaries.sort(Comparator.comparing(MonthlySummary::getMonth).reversed());
+        return summaries;
+    }
+
     // Lọc (Yêu cầu Task 1) - theo UML dùng "filter*"
 
     public List<Expense> filterExpensesByMonth(int year, int month) {
@@ -191,4 +207,6 @@ public class ExpenseManager {
     private void saveToStorage() {
         repository.save(expenses);
     }
+
 }
+

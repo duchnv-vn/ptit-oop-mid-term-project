@@ -1,24 +1,22 @@
 @echo off
-REM Build script for JavaFX Application
+REM Build script for the application (Swing)
 REM Usage: build-fx.bat
 
-set JAVA_FX_SDK=C:\JavaFX\javafx-sdk-23
 set SRC_DIR=src
 set BUILD_DIR=build
-set MODULES=javafx.controls
 
-echo Building JavaFX Application...
+echo Building application (Swing)...
 
 REM Create build directory
 if not exist "%BUILD_DIR%" mkdir "%BUILD_DIR%"
 
-REM Compile model, storage, service classes
-javac -d "%BUILD_DIR%" -encoding UTF-8 "%SRC_DIR%\model\*.java"
-javac -d "%BUILD_DIR%" -encoding UTF-8 -cp "%BUILD_DIR%" "%SRC_DIR%\storage\*.java"
-javac -d "%BUILD_DIR%" -encoding UTF-8 -cp "%BUILD_DIR%" "%SRC_DIR%\service\*.java"
+REM Create a sources list and compile all .java files (works in cmd)
+if exist sources.txt del sources.txt
+for /R %SRC_DIR% %%f in (*.java) do @echo %%f >> sources.txt
 
-REM Compile UI classes with JavaFX
-javac -d "%BUILD_DIR%" -encoding UTF-8 --module-path "%JAVA_FX_SDK%\lib" --add-modules %MODULES% -cp "%BUILD_DIR%" "%SRC_DIR%\ui\*.java"
+javac -d "%BUILD_DIR%" -encoding UTF-8 @sources.txt
+
+if exist sources.txt del sources.txt
 
 echo Build completed!
 echo.

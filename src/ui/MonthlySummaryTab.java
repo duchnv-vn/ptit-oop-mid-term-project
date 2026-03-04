@@ -1,34 +1,37 @@
 package ui;
 
-import javafx.scene.control.Tab;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
- * Monthly Summary Tab - Display expense summaries by month.
+ * Monthly summary placeholder panel (Swing).
  */
-public class MonthlySummaryTab extends Tab {
+public class MonthlySummaryTab extends JPanel {
 
     public MonthlySummaryTab() {
-        setText("Monthly Summary");
-        setClosable(false);
+        setLayout(new BorderLayout(8, 8));
 
-        VBox content = new VBox(10);
-        content.setStyle("-fx-padding: 20;");
+        JLabel title = new JLabel("<html><h2>Monthly Expense Summary</h2></html>");
+        title.setFont(title.getFont().deriveFont(Font.BOLD, 16f));
 
-        Label title = new Label("Monthly Expense Summary");
-        title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-
-        Label placeholder = new Label("Monthly summary features will be implemented here.\n\n" +
+        String placeholderText = "Monthly summary features will be implemented here.\n\n" +
                 "Features:\n" +
                 "- Select month to view\n" +
                 "- Total expenses for the month\n" +
                 "- Breakdown by category\n" +
                 "- Budget vs actual comparison\n" +
-                "- Visual charts and indicators");
-        placeholder.setStyle("-fx-font-size: 14px;");
+                "- Visual charts and indicators";
 
-        content.getChildren().addAll(title, placeholder);
-        setContent(content);
+        JTextArea placeholder = new JTextArea(placeholderText);
+        placeholder.setEditable(false);
+        placeholder.setLineWrap(true);
+        placeholder.setWrapStyleWord(true);
+
+        add(title, BorderLayout.NORTH);
+        add(new JScrollPane(placeholder), BorderLayout.CENTER);
     }
 }

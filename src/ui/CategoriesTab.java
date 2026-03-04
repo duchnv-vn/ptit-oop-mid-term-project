@@ -1,33 +1,36 @@
 package ui;
 
-import javafx.scene.control.Tab;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
- * Categories Tab - Manage expense categories.
+ * Categories placeholder panel (Swing).
  */
-public class CategoriesTab extends Tab {
+public class CategoriesTab extends JPanel {
 
     public CategoriesTab() {
-        setText("Categories");
-        setClosable(false);
+        setLayout(new BorderLayout(8, 8));
 
-        VBox content = new VBox(10);
-        content.setStyle("-fx-padding: 20;");
+        JLabel title = new JLabel("<html><h2>Categories Management</h2></html>");
+        title.setFont(title.getFont().deriveFont(Font.BOLD, 16f));
 
-        Label title = new Label("Categories Management");
-        title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-
-        Label placeholder = new Label("Category management features will be implemented here.\n\n" +
+        String placeholderText = "Category management features will be implemented here.\n\n" +
                 "Features:\n" +
                 "- Add new category\n" +
                 "- Edit category\n" +
                 "- Delete category\n" +
-                "- View all categories");
-        placeholder.setStyle("-fx-font-size: 14px;");
+                "- View all categories";
 
-        content.getChildren().addAll(title, placeholder);
-        setContent(content);
+        JTextArea placeholder = new JTextArea(placeholderText);
+        placeholder.setEditable(false);
+        placeholder.setLineWrap(true);
+        placeholder.setWrapStyleWord(true);
+
+        add(title, BorderLayout.NORTH);
+        add(new JScrollPane(placeholder), BorderLayout.CENTER);
     }
 }

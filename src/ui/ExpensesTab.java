@@ -1,34 +1,37 @@
 package ui;
 
-import javafx.scene.control.Tab;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
- * Expenses Tab - Manage expenses with filters.
+ * Expenses placeholder panel (Swing).
  */
-public class ExpensesTab extends Tab {
+public class ExpensesTab extends JPanel {
 
     public ExpensesTab() {
-        setText("Expenses");
-        setClosable(false);
+        setLayout(new BorderLayout(8, 8));
 
-        VBox content = new VBox(10);
-        content.setStyle("-fx-padding: 20;");
+        JLabel title = new JLabel("<html><h2>Expenses Management</h2></html>");
+        title.setFont(title.getFont().deriveFont(Font.BOLD, 16f));
 
-        Label title = new Label("Expenses Management");
-        title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-
-        Label placeholder = new Label("Expense management features will be implemented here.\n\n" +
+        String placeholderText = "Expense management features will be implemented here.\n\n" +
                 "Features:\n" +
                 "- Add new expense\n" +
                 "- Edit expense\n" +
                 "- Delete expense\n" +
                 "- Filter by category\n" +
-                "- Filter by date range");
-        placeholder.setStyle("-fx-font-size: 14px;");
+                "- Filter by date range";
 
-        content.getChildren().addAll(title, placeholder);
-        setContent(content);
+        JTextArea placeholder = new JTextArea(placeholderText);
+        placeholder.setEditable(false);
+        placeholder.setLineWrap(true);
+        placeholder.setWrapStyleWord(true);
+
+        add(title, BorderLayout.NORTH);
+        add(new JScrollPane(placeholder), BorderLayout.CENTER);
     }
 }

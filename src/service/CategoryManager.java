@@ -1,13 +1,12 @@
 package service;
 
-import model.ExpenseCategory;
-import storage.CategoryCsvRepository;
-
 import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import model.ExpenseCategory;
+import storage.CategoryCsvRepository;
 
 public class CategoryManager {
 

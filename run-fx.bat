@@ -1,10 +1,8 @@
 @echo off
-REM Run script for JavaFX Application
+REM Run script for Swing Application
 REM Usage: run-fx.bat
 
-set JAVA_FX_SDK=C:\JavaFX\javafx-sdk-23
-set MAIN_CLASS=ui.PersonalExpenseManagement
-set MODULES=javafx.controls
+set MAIN_CLASS=Main
 
-echo Running JavaFX Application...
-java --module-path "%JAVA_FX_SDK%\lib" --add-modules %MODULES% -cp build "%MAIN_CLASS%"
+echo Running Swing Application...
+java -cp build %MAIN_CLASS%
